@@ -62,5 +62,15 @@ namespace Travel.Services
                 u.Id.Equals(id)
             );
         }
+
+        public Boolean EmailAlreadyUsed(string email)
+        {
+            return _users.Any(u => u.Email == email);
+        }
+
+        public void AddUser(User u)
+        {
+            _users.Add(u);
+        }
     }
 }

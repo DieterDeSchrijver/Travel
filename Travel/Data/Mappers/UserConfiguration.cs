@@ -13,7 +13,8 @@ namespace Travel.Data.Mappers
         public void Configure(EntityTypeBuilder<User> builder)
         {
             builder.ToTable("User");
-            builder.HasKey(t => t.Email);
+            builder.Property(t => t.Id).ValueGeneratedOnAdd();
+            builder.HasKey(t => t.Id);
         }
     }
 }

@@ -53,38 +53,36 @@ namespace Travel
             services.AddAuthentication(x =>
             {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             })
                 .AddJwtBearer(x =>
                 {
-                    x.RequireHttpsMetadata = false;
-                    x.SaveToken = true;
-                    x.TokenValidationParameters = new TokenValidationParameters
+                    x.SaveToken = true; x.TokenValidationParameters = new TokenValidationParameters
                     {
                         ValidateIssuerSigningKey = true,
                         IssuerSigningKey = new SymmetricSecurityKey(key),
                         ValidateIssuer = false,
-                        ValidateAudience = false
+                        ValidateAudience = false,
+                        RequireExpirationTime = true
                     };
                 });
 
             services.AddScoped<UserService>();
 
-            services.AddOpenApiDocument(c =>
-            {
-                c.DocumentName = "apidocs";
-                c.Title = "Travel API";
+            services.AddOpenApiDocument(c => {
+                c.DocumentName = "OpenAPI3";
+                c.Title = "TravelAPI";
                 c.Version = "v1";
-                c.AddSecurity("JWT", Enumerable.Empty<string>(), new OpenApiSecurityScheme
+                c.Description = "The TravelAPI documentation.";
+                c.AddSecurity("JWT", new OpenApiSecurityScheme
                 {
                     Type = OpenApiSecuritySchemeType.ApiKey,
-                    Name = "Authorization",
                     In = OpenApiSecurityApiKeyLocation.Header,
+                    Name = "Authorization",
                     Description = "Type into the textbox: Bearer {your JWT token}."
                 });
 
                 c.OperationProcessors.Add(
-                    new AspNetCoreOperationSecurityScopeProcessor("JWT Token")); //adds the token when a request is send
+                    new AspNetCoreOperationSecurityScopeProcessor("JWT"));
             });
 
             services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
@@ -118,6 +116,8 @@ namespace Travel
             app.UseAuthentication();
 
             app.UseAuthorization();
+
+            app.UseStatusCodePages();
 
             app.UseEndpoints(endpoints =>
             {

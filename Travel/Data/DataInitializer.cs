@@ -36,10 +36,18 @@ namespace Travel.Data
                 TravelList tl1 = new TravelList("Lijst Rome", DateTime.Now, DateTime.Now, new Location("Rome", coords[0], coords[1], DateTime.Now));
                 tl1.AddItems(tis);
 
+                CreateUser("Dieter", "dieter@gmail.com", "test");
+
                 _dbContext.TravelLists.Add(tl1);
                 _dbContext.SaveChanges();
 
             }
+        }
+
+        private void CreateUser(string name,string email, string password)
+        {
+            User user = new User(name,email, password);
+            _dbContext.Users.Add(user);
         }
     }
 }
