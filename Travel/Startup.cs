@@ -36,7 +36,7 @@ namespace Travel
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")
                         ));
-            
+
 
             services.AddControllers();
             services.AddScoped<TravelListRepository>();

@@ -10,6 +10,16 @@ namespace Travel.Models
         public string Id { get; set; }
         public string Name { get; set; }
         public string Icon { get; set; }
-        public List<TravelItem> Items { get; set; }
+
+        public Category()
+        {
+
+        }
+
+        public Category(string name, string icon)
+        {
+            this.Name = name;
+            this.Icon = icon;
+        }
     }
 }

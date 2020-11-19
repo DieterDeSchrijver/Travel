@@ -30,24 +30,37 @@ namespace Travel.Data
                 tis.Add(ti3);
                 TravelItem ti4 = new TravelItem("Broek");
                 tis.Add(ti4);
+                TravelItem ti5 = new TravelItem("Loopschoenen");
+                tis.Add(ti5);
+                TravelItem ti6 = new TravelItem("Sneakers");
+
+                Category c1 = new Category("Sport", "SportIcon");
+                Category c2 = new Category("Kledij", "KledijIcon");
+                Category c3 = new Category("Schoenen", "SchoenenIcon");
+
+                ti1.AddCategory(c2);
+                ti2.AddCategory(c2);
+                ti3.AddCategory(c2);
+                ti4.AddCategory(c2);
+
+                ti5.AddCategory(c1);
+                ti5.AddCategory(c3);
+
+                ti6.AddCategory(c3);
 
                 double[] coords = { 100, 200 };
 
                 TravelList tl1 = new TravelList("Lijst Rome", DateTime.Now, DateTime.Now, new Location("Rome", coords[0], coords[1], DateTime.Now));
                 tl1.AddItems(tis);
 
-                CreateUser("Dieter", "dieter@gmail.com", "test");
+                User user = new User("Dieter", "dieter@gmail.com", "test");
+                user.AddList(tl1);
 
-                _dbContext.TravelLists.Add(tl1);
+                _dbContext.Users.Add(user);
                 _dbContext.SaveChanges();
 
             }
         }
 
-        private void CreateUser(string name,string email, string password)
-        {
-            User user = new User(name,email, password);
-            _dbContext.Users.Add(user);
-        }
     }
 }

@@ -20,12 +20,18 @@ namespace Travel.Models
         public TravelItem(string name)
         {
             this.Name = name;
+            Categories = new List<Category>();
         }
 
         public TravelItem(string name, List<Category> categories)
         {
             this.Name = name;
             this.Categories = categories;
+        }
+
+        public void AddCategory(Category c)
+        {
+            Categories.Add(c);
         }
     }  
 }

@@ -43,7 +43,7 @@ namespace Travel.Services
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim(ClaimTypes.Name, user.Id),
+                    new Claim(ClaimTypes.Name, user.Email),
                     new Claim(ClaimTypes.Role, "user"),
                 }),
                 Expires = DateTime.UtcNow.AddDays(7),
@@ -55,12 +55,12 @@ namespace Travel.Services
             return ret;
         }
 
-        public User GetAdmin(string id)
+        public User GetByEmail(string email)
         {
 
-            return _users.SingleOrDefault(u =>
-                u.Id.Equals(id)
-            );
+            return _users.Include(u => u.Lists).ThenInclude(tl => tl.Items).ThenInclude(i => i.Categories)
+                .Include(u => u.Lists).ThenInclude(tl => tl.Location)
+                .SingleOrDefault(u => u.Email.Equals(email));
         }
 
         public Boolean EmailAlreadyUsed(string email)
@@ -71,6 +71,11 @@ namespace Travel.Services
         public void AddUser(User u)
         {
             _users.Add(u);
+        }
+
+        public void SaveChanges()
+        {
+            _applicationDbContext.SaveChanges();
         }
     }
 }

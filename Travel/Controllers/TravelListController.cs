@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Travel.Data.Repositories;
 using Travel.Models;
+using Travel.Services;
 
 namespace Travel.Controllers
 {
@@ -14,11 +15,13 @@ namespace Travel.Controllers
     [ApiController]
     public class TravelListController : ControllerBase
     {
-        public TravelListRepository _travelLists;
+        private TravelListRepository _travelLists;
+        private UserService _us;
 
-        public TravelListController(TravelListRepository travelLists)
+        public TravelListController(TravelListRepository travelLists, UserService us)
         {
             this._travelLists = travelLists;
+            this._us = us;
         }
 
         //GET
@@ -26,7 +29,10 @@ namespace Travel.Controllers
         [HttpGet]
         public List<TravelList> GetTravelLists()
         {
+            List<TravelList> tls = _us.GetByEmail(User.Identity.Name).Lists;
             return _travelLists.GetAll();
         }
+
+        
     }
 }

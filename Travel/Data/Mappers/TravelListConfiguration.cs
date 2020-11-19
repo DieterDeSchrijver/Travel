@@ -18,7 +18,6 @@ namespace Travel.Data.Mappers
 
             builder.HasOne(t => t.Location);
 
-            builder.HasMany(t => t.Items);
         }
     }
 }

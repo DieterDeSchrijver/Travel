@@ -15,6 +15,7 @@ namespace Travel.Data
         public DbSet<TravelItem> TravelItems { get; set; }
         public DbSet<Location> Locations { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<Category> Categories { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
@@ -27,6 +28,7 @@ namespace Travel.Data
             modelBuilder.ApplyConfiguration(new TravelItemConfiguration());
             modelBuilder.ApplyConfiguration(new LocationConfiguration());
             modelBuilder.ApplyConfiguration(new UserConfiguration());
+            modelBuilder.ApplyConfiguration(new CategoryConfiguration());
         }
     }
 }

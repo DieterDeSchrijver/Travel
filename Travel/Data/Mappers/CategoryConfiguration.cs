@@ -8,17 +8,13 @@ using Travel.Models;
 
 namespace Travel.Data.Mappers
 {
-    public class TravelItemConfiguration : IEntityTypeConfiguration<TravelItem>
+    public class CategoryConfiguration : IEntityTypeConfiguration<Category>
     {
-        public void Configure(EntityTypeBuilder<TravelItem> builder)
+        public void Configure(EntityTypeBuilder<Category> builder)
         {
-            builder.ToTable("TravelItem");
+            builder.ToTable("Category");
             builder.Property(t => t.Id).ValueGeneratedOnAdd();
             builder.HasKey(t => t.Id);
-
-            builder.HasMany<Category>(ti => ti.Categories);
-
-                
         }
     }
 }

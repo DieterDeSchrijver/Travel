@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Microsoft.AspNetCore.Identity;
 
 namespace Travel.Models
 {
@@ -24,6 +25,12 @@ namespace Travel.Models
             this.Name = name;
             byte[] data = System.Text.Encoding.ASCII.GetBytes(password);
             Password = new System.Security.Cryptography.SHA256Managed().ComputeHash(data);
+            Lists = new List<TravelList>();
+        }
+
+        public void AddList(TravelList tl)
+        {
+            Lists.Add(tl);
         }
     }
 }
