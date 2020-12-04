@@ -10,7 +10,7 @@ namespace Travel.Models
         public string Id { get; set; }
         public string Name { get; set; }
         public Boolean Completed { get; set; }
-        public List<Category> Categories { get; set; }
+        public Category Category { get; set; }
 
         public TravelItem()
         {
@@ -20,18 +20,12 @@ namespace Travel.Models
         public TravelItem(string name)
         {
             this.Name = name;
-            Categories = new List<Category>();
         }
 
-        public TravelItem(string name, List<Category> categories)
+        public TravelItem(string name, Category category)
         {
             this.Name = name;
-            this.Categories = categories;
-        }
-
-        public void AddCategory(Category c)
-        {
-            Categories.Add(c);
+            this.Category = category;
         }
     }  
 }

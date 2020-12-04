@@ -23,9 +23,20 @@ namespace Travel.Data.Repositories
             return _travelLists.Include(tl => tl.Location).Include(tl => tl.Items).ToList();
         }
 
+        public void Update(TravelList tl)
+        {
+            _travelLists.Remove(_travelLists.Single(t => t.Id == tl.Id));
+            _travelLists.Add(tl);
+        }
+
         public TravelList GetOne()
         {
             throw new NotImplementedException();
+        }
+
+        public void SaveChanges()
+        {
+            _applicationDbContext.SaveChanges();
         }
     }
 }

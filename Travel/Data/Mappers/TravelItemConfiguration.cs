@@ -15,10 +15,6 @@ namespace Travel.Data.Mappers
             builder.ToTable("TravelItem");
             builder.Property(t => t.Id).ValueGeneratedOnAdd();
             builder.HasKey(t => t.Id);
-
-            builder.HasMany<Category>(ti => ti.Categories);
-
-                
         }
     }
 }

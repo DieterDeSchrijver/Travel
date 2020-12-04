@@ -1,6 +1,9 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web;
 
 namespace Travel.Models
@@ -9,9 +12,8 @@ namespace Travel.Models
     {
         public string Id { get; set; }
         public string Name { get; set; }
-        public double LngCoord { get; set; }
-        public double LatCoord { get; set; }
-        public DateTime LocalTime { get; set; }
+        public float LngCoord { get; set; }
+        public float LatCoord { get; set; }
         public string Image { get; set; }
 
         public Location()
@@ -19,12 +21,12 @@ namespace Travel.Models
 
         }
 
-        public Location(string name, double lng, double lat, DateTime localTime)
+        public Location(string name, float lng, float lat, string image)
         {
             this.Name = name;
             this.LngCoord = lng ;
             this.LatCoord = lat ;
-            this.LocalTime = localTime;
-        }
+            this.Image = image;
+        }      
     }
 }

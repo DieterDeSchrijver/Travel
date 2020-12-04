@@ -58,7 +58,7 @@ namespace Travel.Services
         public User GetByEmail(string email)
         {
 
-            return _users.Include(u => u.Lists).ThenInclude(tl => tl.Items).ThenInclude(i => i.Categories)
+            return _users.Include(u => u.Lists).ThenInclude(tl => tl.Items).ThenInclude(i => i.Category)
                 .Include(u => u.Lists).ThenInclude(tl => tl.Location)
                 .SingleOrDefault(u => u.Email.Equals(email));
         }

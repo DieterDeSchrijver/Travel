@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -55,6 +56,14 @@ namespace Travel.Controllers
             User user = _userService.GetByEmail(email);
             if (user == null) return NotFound();
             return user;
+        }
+
+        [HttpGet]
+        [Route("GetCategories")]
+        [Authorize(Policy = "User")]
+        public ActionResult<List<Category>> GetCategories()
+        {
+            return _userService.GetByEmail(User.Identity.Name).Categories.ToList();
         }
 
     }

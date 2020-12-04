@@ -16,6 +16,10 @@ namespace Travel.Data.Mappers
             builder.Property(t => t.Id).ValueGeneratedOnAdd();
             builder.HasKey(t => t.Id);
 
+
+            builder.HasMany(tl => tl.Items).WithOne().OnDelete(DeleteBehavior.Cascade);
+
+
             builder.HasOne(t => t.Location);
 
         }

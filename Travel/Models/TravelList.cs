@@ -21,12 +21,13 @@ namespace Travel.Models
 
         }
 
-        public TravelList(string name, DateTime startDate, DateTime endDate, Location location)
+        public TravelList(string name, DateTime startDate,string description, DateTime endDate, Location location)
         {
             this.Listname = name;
             this.StartDate = startDate;
             this.EndDate = endDate;
             this.Location = location;
+            this.Description = description;
             this.Items = new List<TravelItem>();
         }
 

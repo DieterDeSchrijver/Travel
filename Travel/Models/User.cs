@@ -13,6 +13,7 @@ namespace Travel.Models
         public Byte[] Password { get; set; }
         public string Id { get; set; }
         public List<TravelList> Lists { get; set; }
+        public List<Category> Categories { get; set; }
 
         public User()
         {
@@ -26,11 +27,17 @@ namespace Travel.Models
             byte[] data = System.Text.Encoding.ASCII.GetBytes(password);
             Password = new System.Security.Cryptography.SHA256Managed().ComputeHash(data);
             Lists = new List<TravelList>();
+            Categories = new List<Category>();
         }
 
         public void AddList(TravelList tl)
         {
             Lists.Add(tl);
+        }
+
+        public void AddCategory(Category c)
+        {
+            Categories.Add(c);
         }
     }
 }
