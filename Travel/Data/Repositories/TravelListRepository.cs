@@ -20,13 +20,12 @@ namespace Travel.Data.Repositories
 
         public List<TravelList> GetAll()
         {
-            return _travelLists.Include(tl => tl.Location).Include(tl => tl.Items).ToList();
+            return _travelLists.AsNoTracking().Include(tl => tl.Location).Include(tl => tl.Items).ToList();
         }
 
         public void Update(TravelList tl)
         {
-            _travelLists.Remove(_travelLists.Single(t => t.Id == tl.Id));
-            _travelLists.Add(tl);
+            _travelLists.Update(tl);
         }
 
         public TravelList GetOne()

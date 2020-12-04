@@ -41,6 +41,7 @@ namespace Travel
             services.AddControllers();
             services.AddScoped<TravelListRepository>();
             services.AddScoped<DataInitializer>();
+            services.AddScoped<UserService>();
             services.AddAuthorization(options => { options.AddPolicy("User", policy => policy.RequireClaim(ClaimTypes.Role, "user")); });
 
             var appSettingsSection = Configuration.GetSection("Appsettings");
