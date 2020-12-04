@@ -66,5 +66,18 @@ namespace Travel.Controllers
             return _userService.GetByEmail(User.Identity.Name).Categories.ToList();
         }
 
+        [HttpPost]
+        [Route("AddCategory")]
+        [Authorize(Policy = "User")]
+        public ActionResult AddCategory(Category c)
+        {
+            if (c == null)
+            {
+                return BadRequest();
+            }
+            _userService.AddCategory(c, User.Identity.Name);
+            _userService.SaveChanges();
+            return Ok();
+        }
     }
 }

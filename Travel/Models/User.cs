@@ -17,7 +17,8 @@ namespace Travel.Models
 
         public User()
         {
-
+            Lists = new List<TravelList>();
+            Categories = new List<Category>();
         }
 
         public User(string name, string email, string password)

@@ -58,9 +58,14 @@ namespace Travel.Services
         public User GetByEmail(string email)
         {
 
-            return _users.Include(u => u.Lists).ThenInclude(tl => tl.Items).ThenInclude(i => i.Category)
-                .Include(u => u.Lists).ThenInclude(tl => tl.Location)
+            return _users.AsNoTracking().Include(u => u.Lists).ThenInclude(tl => tl.Items).ThenInclude(i => i.Category)
+                .Include(u => u.Lists).ThenInclude(tl => tl.Location).Include(u => u.Categories)
                 .SingleOrDefault(u => u.Email.Equals(email));
+        }
+
+        internal void AddCategory(Category c, string email)
+        {
+            _users.Single(u => u.Email == email).Categories.Add(c);
         }
 
         public Boolean EmailAlreadyUsed(string email)

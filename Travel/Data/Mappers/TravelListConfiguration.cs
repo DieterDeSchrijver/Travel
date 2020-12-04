@@ -19,7 +19,6 @@ namespace Travel.Data.Mappers
 
             builder.HasMany(tl => tl.Items).WithOne().OnDelete(DeleteBehavior.Cascade);
 
-
             builder.HasOne(t => t.Location);
 
         }
