@@ -16,13 +16,11 @@ namespace Travel.Controllers
     [ApiController]
     public class TravelListController : ControllerBase
     {
-        private TravelListRepository _travelLists;
-        private UserService _us;
+        private TravelListService _travelListService;
 
-        public TravelListController(TravelListRepository travelLists, UserService us)
+        public TravelListController(TravelListService travelListService)
         {
-            this._travelLists = travelLists;
-            this._us = us;
+            this._travelListService = travelListService;
         }
 
         //GET
@@ -30,21 +28,19 @@ namespace Travel.Controllers
         [HttpGet]
         public List<TravelList> GetTravelLists()
         {
-            List<TravelList> tls = _us.GetByEmail(User.Identity.Name).Lists;
-            return tls;
+            return _travelListService.GetAllItemsFromUser(User.Identity.Name);
         }
 
         [Authorize(Policy = "User")]
         [HttpGet("{id}")]
         public ActionResult<TravelList> GetTravelList(string id)
         {
-            List<TravelList> tls = _us.GetByEmail(User.Identity.Name).Lists;
-            TravelList tl = tls.Find(tl => tl.Id == id);
-            if (tl == null)
+            TravelList travelList = _travelListService.GetListItemFromUserById(id);
+            if (travelList == null)
             {
                 return BadRequest();
             }
-            return tl;
+            return travelList;
         }
 
         [HttpPost]
@@ -52,10 +48,9 @@ namespace Travel.Controllers
         [Authorize(Policy = "User")]
         public string CreateTravelList(CreateTravelListRequest o)
         {
-            Location loc = new Location(o.Name, o.LngCoord, o.LatCoord, o.Image);
-            TravelList list = new TravelList(o.Listname, o.StartDate, o.Description, o.EndDate, loc);
-            _us.GetByEmail(User.Identity.Name).Lists.Add(list);
-            _us.SaveChanges();
+            var loc = new Location(o.Name, o.LngCoord, o.LatCoord, o.Image);
+            var list = new TravelList(o.Listname, o.StartDate, o.Description, o.EndDate, loc, User.Identity.Name);
+            var id = _travelListService.CreateTravelList(list, User.Identity.Name);
             return list.Id;
         }
 
@@ -64,14 +59,11 @@ namespace Travel.Controllers
         [Authorize(Policy = "User")]
         public ActionResult DeleteTravelList(string travelListID)
         {
-
-            TravelList tl = _us.GetByEmail(User.Identity.Name).Lists.Find(l => l.Id == travelListID);
-            if (tl == null)
+            var succes = _travelListService.DeleteTravelList(travelListID);
+            if (succes)
             {
                 BadRequest("No list found matching the id");
             }
-            _us.GetByEmail(User.Identity.Name).Lists.Remove(tl);
-            _us.SaveChanges();
             return Ok();
         }
 
@@ -80,15 +72,11 @@ namespace Travel.Controllers
         [Authorize(Policy = "User")]
         public ActionResult DeleteItemFromList(string travelListID, string itemID)
         {
-
-            TravelList tl = _us.GetByEmail(User.Identity.Name).Lists.Find(l => l.Id == travelListID);
-            TravelItem ti = tl.Items.Find(i => i.Id == itemID);
-            if (tl == null || itemID == null)
+            var succes = _travelListService.DeleteItemFromList(travelListID, itemID);
+            if (succes)
             {
                 BadRequest("No list found matching the id");
             }
-            _us.GetByEmail(User.Identity.Name).Lists.Find(l => l.Id == tl.Id).Items.Remove(ti);
-            _us.SaveChanges();
             return Ok();
         }
 
@@ -97,13 +85,11 @@ namespace Travel.Controllers
         [Authorize(Policy = "User")]
         public ActionResult EditTravelList(TravelList tl)
         {
-            if (null == _us.GetByEmail(User.Identity.Name).Lists.Find(l => l.Id == tl.Id))
+            var succes = _travelListService.UpdateTravelList(tl);
+            if (succes)
             {
                 return BadRequest("Can't find list");
             }
-            
-            _travelLists.Update(tl);
-            _travelLists.SaveChanges();
             return Ok();
         }
     }

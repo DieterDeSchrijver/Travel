@@ -6,9 +6,15 @@ using Travel.Models;
 
 namespace Travel.Data.Repositories
 {
-    interface ITravelListRepository
+    public interface ITravelListRepository
     {
         List<TravelList> GetAll();
-        TravelList GetOne();
+        TravelList GetOne(String id);
+
+        TravelList Create(TravelList travelList);
+
+        void Delete(string travelListId);
+        void Update(TravelList tl);
+        void DeleteItemFromList(string travelListID, string itemID);
     }
 }

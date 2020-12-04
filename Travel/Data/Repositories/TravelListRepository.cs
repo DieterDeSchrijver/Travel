@@ -29,14 +29,35 @@ namespace Travel.Data.Repositories
             _travelLists.Add(tl);
         }
 
-        public TravelList GetOne()
+        public TravelList GetOne(string id)
         {
-            throw new NotImplementedException();
+           return  _travelLists.FirstOrDefault(t => t.Id.Equals(id));
         }
 
         public void SaveChanges()
         {
             _applicationDbContext.SaveChanges();
+        }
+
+        public TravelList Create(TravelList travelList)
+        {
+            _travelLists.Add(travelList);
+            SaveChanges();
+            return travelList;
+        }
+
+        public void Delete(string travelListId)
+        {
+            _travelLists.Remove(_travelLists.First(t => t.Id.Equals(travelListId)));
+            SaveChanges();
+        }
+
+        public void DeleteItemFromList(string travelListID, string itemID)
+        {
+            var travelList = GetOne(travelListID);
+            var item = travelList.Items.FirstOrDefault(i => i.Equals(itemID));
+            travelList.Items.Remove(item);
+            SaveChanges();
         }
     }
 }

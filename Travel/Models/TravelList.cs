@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
 
 namespace Travel.Models
 {
     public class TravelList
     {
         public string Id { get; set; }
+        public string UserId { get; set; }
         public string Listname { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
@@ -21,19 +19,20 @@ namespace Travel.Models
 
         }
 
-        public TravelList(string name, DateTime startDate,string description, DateTime endDate, Location location)
+        public TravelList(string name, DateTime startDate,string description, DateTime endDate, Location location, string userId)
         {
-            this.Listname = name;
-            this.StartDate = startDate;
-            this.EndDate = endDate;
-            this.Location = location;
-            this.Description = description;
-            this.Items = new List<TravelItem>();
+            Listname = name;
+            StartDate = startDate; 
+            EndDate = endDate;
+            Location = location;
+            Description = description;
+            Items = new List<TravelItem>();
+            UserId = userId;
         }
 
         public void SetDestription(string description)
         {
-            this.Description = description;
+            Description = description;
         }
 
         public void AddItem(TravelItem item)
