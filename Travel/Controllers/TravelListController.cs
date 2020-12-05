@@ -60,7 +60,7 @@ namespace Travel.Controllers
         public ActionResult DeleteTravelList(string travelListID)
         {
             var succes = _travelListService.DeleteTravelList(travelListID);
-            if (succes)
+            if (!succes)
             {
                 BadRequest("No list found matching the id");
             }
@@ -73,7 +73,7 @@ namespace Travel.Controllers
         public ActionResult DeleteItemFromList(string travelListID, string itemID)
         {
             var succes = _travelListService.DeleteItemFromList(travelListID, itemID);
-            if (succes)
+            if (!succes)
             {
                 BadRequest("No list found matching the id");
             }
@@ -86,7 +86,7 @@ namespace Travel.Controllers
         public ActionResult EditTravelList(TravelList tl)
         {
             var succes = _travelListService.UpdateTravelList(tl);
-            if (succes)
+            if (!succes)
             {
                 return BadRequest("Can't find list");
             }

@@ -26,6 +26,7 @@ namespace Travel.Data.Repositories
         public void Update(TravelList tl)
         {
             _travelLists.Update(tl);
+            SaveChanges();
         }
 
         public TravelList GetOne(string id)

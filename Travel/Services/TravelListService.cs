@@ -18,7 +18,7 @@ namespace Travel.Services
 
         public List<TravelList> GetAllItemsFromUser(string userMail)
         {
-            return _travelListRepository.GetAll().Where(t => t.UserId.Equals(userMail)).ToList();
+            return _travelListRepository.GetAll().Where(t => t.UserName.Equals(userMail)).ToList();
         }
 
         public TravelList GetListItemFromUserById(string id)
@@ -28,7 +28,7 @@ namespace Travel.Services
 
         public String CreateTravelList(TravelList list, string name)
         {
-            list.UserId = name;
+            list.UserName = name;
             var x = _travelListRepository.Create(list);
             return x.Id;
         }

@@ -5,6 +5,7 @@
     <AssemblyName>time</AssemblyName>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <UserSecretsId>91cd3413-e791-4a4c-a320-864f47a0052a</UserSecretsId>
+    <StartupObject>Travel.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.0" />

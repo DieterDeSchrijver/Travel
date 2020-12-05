@@ -17,7 +17,7 @@ namespace Travel.Data
 
         public void InitializeData()
         {
-
+            _dbContext.Database.EnsureDeleted();
             if (_dbContext.Database.EnsureCreated())
             {
                 #region<Rome>
@@ -48,7 +48,7 @@ namespace Travel.Data
 
                 float[] coords = { (float)3.0230, (float)51.012312 };
 
-                TravelList tl1 = new TravelList("Lijst Rome", DateTime.Now,"Joepiee!!!!!!!",  DateTime.Now, new Location("Rome", coords[0], coords[1], "https://images.unsplash.com/photo-1473496169904-658ba7c44d8a?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1650&q=80"), "1");
+                TravelList tl1 = new TravelList("Lijst Rome", DateTime.Now,"Joepiee!!!!!!!",  DateTime.Now, new Location("Rome", coords[0], coords[1], "https://images.unsplash.com/photo-1473496169904-658ba7c44d8a?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1650&q=80"), "dieter@gmail.com");
                 tl1.AddItems(rome);
                 #endregion
 
@@ -80,11 +80,11 @@ namespace Travel.Data
                 t6.Category = c3;
 
                 float[] coord = { (float)2.349014, (float)48.864716 };
+                User user = new User("Dieter", "dieter@gmail.com", "test");
 
-                TravelList tlp = new TravelList("Lijst Parijs", DateTime.Now, "Joepiee!!!!!!!", DateTime.Now, new Location("Parijs", coord[0], coord[1], "https://images.unsplash.com/photo-1440778303588-435521a205bc?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1650&q=80"), "tijldeblander@gmail.com");
+                TravelList tlp = new TravelList("Lijst Parijs", DateTime.Now, "Joepiee!!!!!!!", DateTime.Now, new Location("Parijs", coord[0], coord[1], "https://images.unsplash.com/photo-1440778303588-435521a205bc?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1650&q=80"), "dieter@gmail.com");
                 tlp.AddItems(parijs);
 
-                User user = new User("Dieter", "dieter@gmail.com", "test");
                 user.AddList(tlp);
                 user.AddList(tl1);
                 user.AddCategory(c1);

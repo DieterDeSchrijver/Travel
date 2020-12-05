@@ -6,7 +6,7 @@ namespace Travel.Models
     public class TravelList
     {
         public string Id { get; set; }
-        public string UserId { get; set; }
+        public string UserName { get; set; }
         public string Listname { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
@@ -27,7 +27,7 @@ namespace Travel.Models
             Location = location;
             Description = description;
             Items = new List<TravelItem>();
-            UserId = userId;
+            UserName = userId;
         }
 
         public void SetDestription(string description)
