@@ -40,6 +40,7 @@ namespace Travel
 
             services.AddControllers();
             services.AddScoped<ITravelListRepository, TravelListRepository>();
+            services.AddScoped<TravelListService>();
             services.AddScoped<DataInitializer>();
             services.AddScoped<UserService>();
             services.AddAuthorization(options => { options.AddPolicy("User", policy => policy.RequireClaim(ClaimTypes.Role, "user")); });
