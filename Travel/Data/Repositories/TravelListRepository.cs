@@ -20,7 +20,7 @@ namespace Travel.Data.Repositories
 
         public List<TravelList> GetAll()
         {
-            return _travelLists.AsNoTracking().Include(tl => tl.Location).Include(tl => tl.Items).ThenInclude(i => i.Category).ToList();
+            return _travelLists.AsNoTracking().Include(tl => tl.Location).Include(tl => tl.Items).ToList();
         }
 
         public void Update(TravelList tl)

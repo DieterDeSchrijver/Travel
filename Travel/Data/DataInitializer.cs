@@ -39,11 +39,11 @@ namespace Travel.Data
                 Category c2 = new Category("Kledij", "KledijIcon");
                 Category c3 = new Category("Schoenen", "SchoenenIcon");
 
-                ti1.Category = c1;
+                ti1.Category = c2;
                 ti2.Category = c2;
-                ti3.Category = c3;
-                ti4.Category = c1;
-                ti5.Category = c2;
+                ti3.Category = c2;
+                ti4.Category = c2;
+                ti5.Category = c3;
                 ti6.Category = c3;
 
                 float[] coords = { (float)3.0230, (float)51.012312 };
